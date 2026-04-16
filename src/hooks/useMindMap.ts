@@ -162,7 +162,7 @@ export function useMindMap() {
         }
       };
 
-      layout(project.rootId, -400, 0);
+      layout(project.rootId, -300, 0);
 
       return {
         ...prev,
