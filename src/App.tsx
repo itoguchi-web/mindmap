@@ -446,16 +446,7 @@ export default function App() {
         }}
       >
         {/* 広告コード開始 */}
-        <div 
-          ref={(el) => {
-          if (el && el.childNodes.length === 0) {
-            const script = document.createElement('script');
-            script.src = "https://adm.shinobi.jp/s/1ddeaa2e03dd63c7e013937bb809039d"; // ここにソースURLを記述
-            script.async = true;
-            el.appendChild(script);
-            }
-          }} 
-        />
+          【広告】
         {/* 広告コード終了 */}
       </div>
 
