@@ -446,7 +446,7 @@ export default function App() {
         }}
       >
         {/* 広告コード開始 */}
-        【ここに上部広告が入ります】
+        <script src="https://adm.shinobi.jp/s/1ddeaa2e03dd63c7e013937bb809039d"></script>
         {/* 広告コード終了 */}
       </div>
 
