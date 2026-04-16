@@ -659,7 +659,7 @@ export default function App() {
           </main>
 
           {/* ズームコントロール (右サイドバー 260px + 余白 24px = 284px) */}
-          <div className="fixed bottom-6 right-[284px] flex flex-col gap-3 z-50 pointer-events-none transition-all duration-300">
+          <div className="fixed bottom-6 right-[200px] flex flex-col gap-3 z-50 pointer-events-none transition-all duration-300">
             {/* ノード操作ボタン */}
             <div className="flex flex-col bg-background/95 backdrop-blur-md border border-border/50 rounded-xl shadow-2xl p-1.5 pointer-events-auto">
               <button 
