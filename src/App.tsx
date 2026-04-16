@@ -10,25 +10,6 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from './lib/utils';
 
-// 忍者広告 (Shinobi Ad) コンポーネント
-const ShinobiAd = ({ src }: { src: string }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      // 既存の内容をクリア
-      containerRef.current.innerHTML = '';
-      const script = document.createElement('script');
-      script.src = src;
-      script.type = 'text/javascript';
-      script.async = true;
-      containerRef.current.appendChild(script);
-    }
-  }, [src]);
-
-  return <div ref={containerRef} className="w-full flex justify-center" />;
-};
-
 export default function App() {
   const { 
     projects, currentProjectId, currentProject, selectedId, setSelectedId, 
@@ -465,7 +446,7 @@ export default function App() {
         }}
       >
         {/* 広告コード開始 */}
-        <ShinobiAd src="https://adm.shinobi.jp/s/1ddeaa2e03dd63c7e013937bb809039d" />
+        【ここに上部広告が入ります】
         {/* 広告コード終了 */}
       </div>
 
