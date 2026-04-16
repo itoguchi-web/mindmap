@@ -446,7 +446,7 @@ export default function App() {
         }}
       >
         {/* 広告コード開始 */}
-         【広告】
+        【広告】
         {/* 広告コード終了 */}
       </div>
 
