@@ -19,7 +19,7 @@ const createNewProject = (title: string = 'New Mind Map'): MindMapProject => {
         children: [],
         parentId: null,
         isExpanded: true,
-        position: { x: -400, y: 0 },
+        position: { x: 0, y: 0 },
       },
     },
   };
@@ -162,7 +162,7 @@ export function useMindMap() {
         }
       };
 
-      layout(project.rootId, 0, 0);
+      layout(project.rootId, -400, 0);
 
       return {
         ...prev,
