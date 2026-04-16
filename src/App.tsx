@@ -10,6 +10,25 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from './lib/utils';
 
+// 忍者広告 (Shinobi Ad) コンポーネント
+const ShinobiAd = ({ src }: { src: string }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      // 既存の内容をクリア
+      containerRef.current.innerHTML = '';
+      const script = document.createElement('script');
+      script.src = src;
+      script.type = 'text/javascript';
+      script.async = true;
+      containerRef.current.appendChild(script);
+    }
+  }, [src]);
+
+  return <div ref={containerRef} className="w-full flex justify-center" />;
+};
+
 export default function App() {
   const { 
     projects, currentProjectId, currentProject, selectedId, setSelectedId, 
@@ -423,35 +442,8 @@ export default function App() {
       }} 
       className={cn(theme, "text-foreground")}
     >
-      {/* ==========================================
-          上部広告枠 (Top Ad Slot)
-          ここに広告のタグやスクリプトを記載してください
-          ========================================== */}
-      <div 
-        id="top-ad-slot" 
-        style={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '60px',
-          backgroundColor: '#ff0000',
-          zIndex: 100000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#ffffff',
-          fontWeight: 'bold',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
-        }}
-      >
-        {/* 広告コード開始 */}
-        【ここに上部広告が入ります】
-        {/* 広告コード終了 */}
-      </div>
-
-      {/* 第二の箱：メインコンテンツ */}
-      <div style={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative', marginTop: '60px' }}>
+      {/* メインコンテンツ (上部広告を削除し、marginTopも0に) */}
+      <div style={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
         {/* 左：サイドバー */}
         <AnimatePresence mode="wait">
           {showSidebar && (
@@ -573,19 +565,6 @@ export default function App() {
                 </div>
               </div>
 
-              {/* ==========================================
-                  サイド広告枠 (Side Ad Slot)
-                  ここに広告のタグやスクリプトを記載してください
-                  ========================================== */}
-              <div 
-                id="side-ad-slot" 
-                className="h-[166px] border-4 border-dashed border-yellow-400 flex-shrink-0 flex items-center justify-center m-[0_15px_15px_15px] bg-yellow-400/10 rounded-xl text-yellow-400 font-bold overflow-hidden"
-              >
-                {/* 広告コード開始 */}
-                サイド広告枠
-                {/* 広告コード終了 */}
-              </div>
-
               {/* モードボタン */}
               <div id="mode-button" style={{ padding: '0 20px 15px 20px' }}>
                 <button 
@@ -606,9 +585,9 @@ export default function App() {
           <header 
             className="fixed flex items-center justify-between px-6 py-4 pointer-events-none z-20"
             style={{ 
-              top: '60px', 
+              top: '0', 
               left: showSidebar ? '260px' : '0', 
-              right: 0,
+              right: '0',
               transition: 'left 0.3s ease-in-out'
             }}
           >
@@ -679,8 +658,8 @@ export default function App() {
             </div>
           </main>
 
-          {/* ズームコントロール */}
-          <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50 pointer-events-none">
+          {/* ズームコントロール (右サイドバー 260px + 余白 24px = 284px) */}
+          <div className="fixed bottom-6 right-[284px] flex flex-col gap-3 z-50 pointer-events-none transition-all duration-300">
             {/* ノード操作ボタン */}
             <div className="flex flex-col bg-background/95 backdrop-blur-md border border-border/50 rounded-xl shadow-2xl p-1.5 pointer-events-auto">
               <button 
