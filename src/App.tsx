@@ -798,6 +798,9 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 9999 }}>
+        <ShinobiAd src="https://adm.shinobi.jp/s/cde6f48176e14f9ccb01df3d16b839" />
+      </div>
     </div>
   );
 }
