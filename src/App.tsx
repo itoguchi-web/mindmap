@@ -799,7 +799,7 @@ export default function App() {
         )}
       </AnimatePresence>
       <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 9999 }}>
-        <ShinobiAd src="https://adm.shinobi.jp/s/cde6f48176e14f9ccb01df3d16b839" />
+        <ShinobiAd src="https://adm.shinobi.jp/s/44704ab05b411ea5fd7c5489bbac5a21" />
       </div>
     </div>
   );
