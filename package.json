@@ -1,6 +1,7 @@
 {
   "name": "react-example",
   "private": true,
+  "homepage": "https://itoguchi-web.github.io/mindmap/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
