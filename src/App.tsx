@@ -447,23 +447,33 @@ export default function App() {
         {/* 左：サイドバー */}
         <AnimatePresence mode="wait">
           {showSidebar && (
-            <motion.aside
-              id="sidebar"
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 260, opacity: 1 }}
-              exit={{ width: 0, opacity: 0 }}
-              className="no-scrollbar"
-              style={{ 
-                width: '260px', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                background: '#111', 
-                zIndex: 9999,
-                flexShrink: 0,
-                borderRight: '1px solid #333',
-                overflow: 'hidden'
-              }}
-            >
+            <>
+              {/* モバイル用バックドロップ (サイドバーの外側をタップで閉じる) */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowSidebar(false)}
+                className="fixed inset-0 bg-black/50 z-[9998] md:hidden"
+              />
+              <motion.aside
+                id="sidebar"
+                initial={{ x: -260, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -260, opacity: 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="no-scrollbar fixed md:relative h-full"
+                style={{ 
+                  width: '260px', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  background: '#111', 
+                  zIndex: 9999,
+                  flexShrink: 0,
+                  borderRight: '1px solid #333',
+                  overflow: 'hidden'
+                }}
+              >
               {/* 【メニュー項目 - 固定ヘッダー】 */}
               <div style={{ padding: '20px', flexShrink: 0, color: 'white' }}>
                 <div className="flex items-center justify-between mb-8">
@@ -576,22 +586,23 @@ export default function App() {
                 </button>
               </div>
             </motion.aside>
-          )}
-        </AnimatePresence>
+          </>
+        )}
+      </AnimatePresence>
 
         {/* 右：マインドマップ領域 */}
         <div style={{ flexGrow: 1, position: 'relative', overflow: 'hidden' }}>
           {/* ヘッダーオーバーレイ */}
           <header 
-            className="fixed flex items-center justify-between px-6 py-4 pointer-events-none z-20"
+            className="fixed flex items-center justify-between px-4 md:px-6 py-4 pointer-events-none z-20"
             style={{ 
               top: '0', 
-              left: showSidebar ? '260px' : '0', 
+              left: '0',
               right: '0',
-              transition: 'left 0.3s ease-in-out'
+              transition: 'all 0.3s ease-in-out'
             }}
           >
-            <div className="flex items-center gap-4 pointer-events-auto">
+            <div className="flex items-center gap-2 md:gap-4 pointer-events-auto">
               {!showSidebar && (
                 <button 
                   onClick={() => setShowSidebar(true)}
@@ -600,9 +611,9 @@ export default function App() {
                   <Menu className="w-5 h-5" />
                 </button>
               )}
-              <div className="bg-background/80 backdrop-blur-md border rounded-lg px-4 py-2 shadow-sm flex items-center gap-3">
-                <span className="text-sm font-semibold">{currentProject?.title}</span>
-                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+              <div className="bg-background/80 backdrop-blur-md border rounded-lg px-3 md:px-4 py-2 shadow-sm flex items-center gap-2 md:gap-3">
+                <span className="text-sm font-semibold truncate max-w-[120px] md:max-w-none">{currentProject?.title}</span>
+                <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse flex-shrink-0" />
               </div>
             </div>
 
@@ -658,8 +669,8 @@ export default function App() {
             </div>
           </main>
 
-          {/* ズームコントロール (右サイドバー 260px + 余白 24px = 284px) */}
-          <div className="fixed bottom-6 right-[200px] flex flex-col gap-3 z-50 pointer-events-none transition-all duration-300">
+          {/* ズームコントロール (以前の固定位置に戻す) */}
+          <div className="fixed bottom-6 right-[284px] flex flex-col gap-3 z-50 pointer-events-none transition-all duration-300">
             {/* ノード操作ボタン */}
             <div className="flex flex-col bg-background/95 backdrop-blur-md border border-border/50 rounded-xl shadow-2xl p-1.5 pointer-events-auto">
               <button 
