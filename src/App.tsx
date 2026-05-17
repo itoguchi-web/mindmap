@@ -585,6 +585,10 @@ export default function App() {
                   {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
                 </button>
               </div>
+              {/* ★ここに忍者広告を表示するコードを再配置します */}
+              <div style={{ padding: '0 20px 15px 20px', width: '100%' }}>
+                <ShinobiAd src="https://adm.shinobi.jp/s/44704ab05b411ea5fd7c5489bbac5a21" /> 
+              </div>
             </motion.aside>
           </>
         )}
